@@ -25,3 +25,13 @@ async function connectToDatabase() {
 }
 // defining a function doesn't run it, and this line actually runs it.
 connectToDatabase();
+
+// GET / checks the database connection and reports back
+app.get("/", async (req, res) => {
+  try {
+    await client.db("admin").command({ ping: 1 });
+    res.json({ message: "Successfully connected to the database!" });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to connect to the database." });
+  }
+});
