@@ -29,9 +29,18 @@ connectToDatabase();
 // GET / checks the database connection and reports back
 app.get("/", async (req, res) => {
   try {
+    // this asks Atlas "are you there?" right now.
+    // ping is a tiny built-in check, and the admin database is where those built-in commands live
     await client.db("admin").command({ ping: 1 });
     res.json({ message: "Successfully connected to the database!" });
   } catch (error) {
     res.status(500).json({ message: "Failed to connect to the database." });
   }
+});
+
+// Start the server and listen for requests on port 3001
+
+// this turns the server on and has it wait at door 3001 for visitors. The arrow function runs once it's ready.
+app.listen(port, () => {
+  console.log(`Server running at http://localhost:${port}`);
 });
