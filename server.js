@@ -7,3 +7,7 @@ require("dotenv").config();
 console.log(
   process.env.MONGO_URI ? "MONGO_URI loaded ✅" : "MONGO_URI missing ❌",
 );
+
+const app = express();
+
+const port = 3001;
